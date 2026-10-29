@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+<header>
+    <h1>Home</h1>
+</header>
+<main>
+    <div>
+        <p th:text="${message}"></p>
+        <p>
+            Today's time and date:
+            <time th:text="${timeAndDate}"></time>
+        </p>
+    </div>
+    <div>
+        <p>Links</p>
+        <a href="/books">All books</a>
+    </div>
+</main>
+</body>
+</html>

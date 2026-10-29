@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Filter Books</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+<header>
+    <h1>Find Books</h1>
+</header>
+
+<main>
+    <section>
+        <h2>Filter by genre</h2>
+
+        <form th:action="@{/filter/genre}" method="post">
+            <label for="genre">Choose a genre:</label>
+
+            <select id="genre" name="genre" required>
+                <option value="">Choose a genre</option>
+                <option th:each="genre : ${genres}"
+                        th:value="${genre}"
+                        th:text="${genre}">
+                </option>
+            </select>
+
+            <button type="submit">Apply filter</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>Search by title</h2>
+
+        <form th:action="@{/filter/title}" method="get">
+            <label for="title">Title:</label>
+            <input type="text"
+                   id="title"
+                   name="title"
+                   required>
+
+            <button type="submit">Find books</button>
+        </form>
+    </section>
+
+    <section th:if="${error != null}">
+        <p th:text="${error}"></p>
+    </section>
+
+    <section th:if="${books != null}">
+        <h2 th:if="${selectedGenre != null}">
+            Books in genre: <span th:text="${selectedGenre}"></span>
+        </h2>
+
+        <ul>
+            <li th:each="book : ${books}">
+                <p>Title: <span th:text="${book.title}"></span></p>
+                <p>Author: <span th:text="${book.author}"></span></p>
+                <p>Genre: <span th:text="${book.genre}"></span></p>
+            </li>
+        </ul>
+    </section>
+
+    <p><a th:href="@{/books}">Back to all books</a></p>
+</main>
+</body>
+</html>
